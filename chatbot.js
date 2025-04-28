@@ -27,25 +27,37 @@ const keywordResponses = [
     ]
   },
   { 
-    keywords: ["regularizar", "regular", "condiciones regular"], 
+    keywords: ["regularizar", "regular", "condiciones regular", "condición regular", "requisitos regular", "requisitos para regularizar"], 
     responses: [
       "📚 Para REGULARIZAR:\n- Asistir y entregar los 3 Trabajos Prácticos.\n- Aprobar 2 exámenes parciales (mínimo 4 puntos cada uno)."
     ]
   },
   { 
-    keywords: ["parciales", "fecha parcial", "examen parcial"], 
+    keywords: ["promocionar", "qué necesito para promocionar", "requisitos promocionar", "requisitos para promocionar"], 
+    responses: [
+      "📚 Para promocionar la materia necesitas:\n- 80% de asistencia en Aula-Taller, Tutorías, Conversatorios y Trabajos Prácticos.\n- Aprobar 3 Trabajos Prácticos con promedio 7.\n- Aprobar los parciales con un promedio de 7.\n- Entregar el trabajo final."
+    ]
+  },
+  { 
+    keywords: ["libre", "libres", "rendir libre", "requisitos libre", "requisitos para rendir libre"], 
+    responses: [
+      "📚 Para rendir LIBRE la materia necesitas:\n- Presentar una propuesta creativa sobre un tema del curso.\n- Aprobar una evaluación escrita.\n- Defender tu propuesta de manera oral.\n\nToda la información sobre el Examen LIBRE está disponible en la pestaña 'Examen LIBRES' de la página de la cátedra. Podés acceder a ella aquí: <a href='https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=12#tabs-tree-start' target='_blank'>Examen LIBRES</a>"
+    ]
+  },
+  { 
+    keywords: ["parcial", "parciales", "fecha parcial", "fecha de parcial", "primer parcial", "segundo parcial", "recuperatorio"], 
     responses: [
       "📝 PARCIALES:\n- Primer Parcial: Martes 13 de mayo.\n- Segundo Parcial: Martes 17 de junio.\n- Recuperatorio: Jueves 4 de julio."
     ]
   },
   { 
-    keywords: ["trabajo práctico", "trabajos prácticos", "tp"], 
+    keywords: ["trabajo práctico", "trabajos prácticos", "tp", "tps", "trabajo práctico próximo", "próximo tp"], 
     responses: [
       "🛠️ TRABAJOS PRÁCTICOS:\n- Primer TP: 15 de abril.\n- Segundo TP: 27 de mayo.\n- Tercer TP: 24 de junio."
     ]
   },
   { 
-    keywords: ["bibliografía", "material de estudio", "dónde está el material"], 
+    keywords: ["bibliografía", "material de estudio", "dónde está el material", "donde encuentro los textos", "materiales"], 
     responses: [
       "📚 Todo el material está disponible en:\n- <a href='https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=2#tabs-tree-start' target='_blank'>Materiales Bibliográficos</a>\n- <a href='https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=9#tabs-tree-start' target='_blank'>Parciales</a>\n- <a href='https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=5#tabs-tree-start' target='_blank'>Trabajos Prácticos</a>"
     ]
@@ -56,18 +68,6 @@ const keywordResponses = [
       "📬 Para consultas específicas, escribí a: cpype.unc@gmail.com"
     ]
   },
-  { 
-    keywords: ["promocionar", "qué necesito para promocionar"], 
-    responses: [
-      "📚 Para promocionar la materia necesitas:\n- 80% de asistencia en Aula-Taller, Tutorías, Conversatorios y Trabajos Prácticos.\n- Aprobar 3 Trabajos Prácticos con promedio 7.\n- Aprobar los parciales con un promedio de 7.\n- Entregar el trabajo final."
-    ]
-  },
-  { 
-    keywords: ["regularizar", "qué necesito para regularizar"], 
-    responses: [
-      "📚 Para regularizar la materia necesitas:\n- Aprobar 2 parciales (mínimo 4 puntos cada uno).\n- Entregar los 3 Trabajos Prácticos (mínimo 2 aprobados con 4 puntos)."
-    ]
-  }
 ];
 
 const defaultResponses = [
