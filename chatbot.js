@@ -1,15 +1,17 @@
+// chatbot.js
+
 const keywordResponses = [
   { 
     keywords: ["hola", "buenas", "saludos"], 
     responses: [
       getDynamicGreeting(), 
-      "¡Hola! 😊 ¿Sobre qué tema te gustaría consultar? Te puedo ayudar con cursado, parciales, trabajos prácticos o materiales."
+      "¡Hola! 😊 Soy Pepe, el bot de la cátedra de Pedagogía de la Facultad de Psicología de la UNC. ¿Sobre qué tema te gustaría consultar? Te puedo ayudar con cursado, parciales, trabajos prácticos o materiales."
     ]
   },
   { 
     keywords: ["preguntas sugeridas", "qué puedo preguntar", "ayuda"], 
     responses: [
-      "🧠 Puedes preguntarme, por ejemplo:\n- ¿Cuándo es el próximo parcial?\n- ¿Qué textos entran en el parcial?\n- ¿Qué textos entran en el siguiente trabajo práctico?"
+      "🧠 Puedes preguntarme, por ejemplo:\n- ¿Qué necesito para promocionar?\n- ¿Qué necesito para regularizar?\n- ¿Cuándo es el primer parcial?\n- ¿Qué fechas son los trabajos prácticos?\n- ¿Dónde encuentro la bibliografía?"
     ]
   },
   { 
@@ -31,27 +33,39 @@ const keywordResponses = [
     ]
   },
   { 
-    keywords: ["parciales", "fecha parcial", "examen parcial", "próximo parcial"], 
+    keywords: ["parciales", "fecha parcial", "examen parcial"], 
     responses: [
-      getNextPartialDate()
+      "📝 PARCIALES:\n- Primer Parcial: Martes 13 de mayo.\n- Segundo Parcial: Martes 17 de junio.\n- Recuperatorio: Jueves 4 de julio."
     ]
   },
   { 
-    keywords: ["trabajo práctico", "trabajos prácticos", "tp", "próximo tp", "siguiente tp"], 
+    keywords: ["trabajo práctico", "trabajos prácticos", "tp"], 
     responses: [
-      "🛠️ El siguiente trabajo práctico se detalla en la sección correspondiente del aula virtual. Puedes verlo aquí: <a href='https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=5#tabs-tree-start' target='_blank'>Trabajos Prácticos</a>"
+      "🛠️ TRABAJOS PRÁCTICOS:\n- Primer TP: 15 de abril.\n- Segundo TP: 27 de mayo.\n- Tercer TP: 24 de junio."
     ]
   },
   { 
-    keywords: ["bibliografía", "material de estudio", "dónde está el material", "textos del parcial"], 
+    keywords: ["bibliografía", "material de estudio", "dónde está el material"], 
     responses: [
-      "📚 La bibliografía para los parciales está disponible aquí: <a href='https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=9#tabs-tree-start' target='_blank'>Parciales</a>"
+      "📚 Todo el material está disponible en:\n- <a href='https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=2#tabs-tree-start' target='_blank'>Materiales Bibliográficos</a>\n- <a href='https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=9#tabs-tree-start' target='_blank'>Parciales</a>\n- <a href='https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=5#tabs-tree-start' target='_blank'>Trabajos Prácticos</a>"
     ]
   },
   { 
     keywords: ["correo", "contacto", "consultas"], 
     responses: [
       "📬 Para consultas específicas, escribí a: cpype.unc@gmail.com"
+    ]
+  },
+  { 
+    keywords: ["promocionar", "qué necesito para promocionar"], 
+    responses: [
+      "📚 Para promocionar la materia necesitas:\n- 80% de asistencia en Aula-Taller, Tutorías, Conversatorios y Trabajos Prácticos.\n- Aprobar 3 Trabajos Prácticos con promedio 7.\n- Aprobar los parciales con un promedio de 7.\n- Entregar el trabajo final."
+    ]
+  },
+  { 
+    keywords: ["regularizar", "qué necesito para regularizar"], 
+    responses: [
+      "📚 Para regularizar la materia necesitas:\n- Aprobar 2 parciales (mínimo 4 puntos cada uno).\n- Entregar los 3 Trabajos Prácticos (mínimo 2 aprobados con 4 puntos)."
     ]
   }
 ];
@@ -61,30 +75,6 @@ const defaultResponses = [
   "📩 Esa pregunta es mejor tratarla directamente por correo: cpype.unc@gmail.com",
   "ℹ️ Te sugiero escribir a cpype.unc@gmail.com para resolver esa duda específica."
 ];
-
-// Función para obtener la fecha del próximo parcial
-function getNextPartialDate() {
-  const currentDate = new Date();
-  const partialDates = [
-    { name: "Primer Parcial", date: new Date("2025-05-13") },
-    { name: "Segundo Parcial", date: new Date("2025-06-17") },
-    { name: "Recuperatorio", date: new Date("2025-07-04") }
-  ];
-
-  let nextPartial = null;
-  for (let i = 0; i < partialDates.length; i++) {
-    if (partialDates[i].date > currentDate) {
-      nextPartial = partialDates[i];
-      break;
-    }
-  }
-
-  if (nextPartial) {
-    return `📝 El próximo parcial es el ${nextPartial.name} el ${nextPartial.date.toLocaleDateString()}.`;
-  } else {
-    return "📅 No hay más parciales programados en esta materia.";
-  }
-}
 
 function sendMessage() {
     let userText = document.getElementById("userinput").value.trim();
