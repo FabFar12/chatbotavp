@@ -3,67 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Chatbot Aula Virtual</title>
+  <title>Chatbot AVP</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 90vh;
-    }
-    #chatbot {
-      width: 340px;
-      max-height: 500px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      background-color: #ffffff;
-      font-size: 14px;
-    }
-    #chatlog {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      background-color: #f9f9f9;
-    }
-    #userinput {
-      flex: 1;
-      padding: 10px;
-      border: none;
-    }
-    button {
-      padding: 10px;
-      background: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #45a049;
-    }
-    .input-area {
-      display: flex;
-      border-top: 1px solid #ccc;
+      height: 100vh;
+      background: #f0f2f5;
+      font-family: 'Arial', sans-serif;
     }
   </style>
 </head>
 <body>
 
-<div id="chatbot">
-  <div id="chatlog"></div>
-  <div class="input-area">
-    <input id="userinput" type="text" placeholder="Escribe tu mensaje...">
-    <button onclick="sendMessage()">Enviar</button>
+<div id="chatbot" style="width:340px; max-height:500px; border-radius:15px; box-shadow:0 0 10px rgba(0,0,0,0.1); overflow:hidden; display:flex; flex-direction:column; font-family:'Arial', sans-serif; font-size:14px; background-color:white;">
+  <div id="chatlog" style="flex:1; padding:10px; overflow-y:auto; background-color:#f9f9f9;"></div>
+  <div style="display:flex; border-top:1px solid #ccc;">
+    <input id="userinput" type="text" placeholder="Escribe tu mensaje..." style="flex:1; padding:10px; border:none;">
+    <button id="sendButton" style="padding:10px; background:#4CAF50; color:white; border:none; cursor:pointer;">Enviar</button>
   </div>
 </div>
 
-<!-- Carga el JS -->
-<script src="chatbot.js" defer></script>
+<!-- Ahora el llamado correcto al chatbot.js -->
+<script src="chatbot.js"></script>
+
+<!-- Agregamos el evento después de cargar el JS -->
+<script>
+  document.getElementById("sendButton").addEventListener("click", sendMessage);
+  document.getElementById("userinput").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      sendMessage();
+    }
+  });
+</script>
 
 </body>
 </html>
