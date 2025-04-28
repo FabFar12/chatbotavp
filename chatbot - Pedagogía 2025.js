@@ -66,15 +66,17 @@ const defaultResponses = [
 
 function sendMessage() {
     let userText = document.getElementById("userinput").value.trim();
+    console.log("Texto escrito:", userText); // <-- línea de prueba
+
     if (userText === "") return;
-    
+
     appendMessage(userText, "user");
-    
+
     let botReply = getBotResponse(userText.toLowerCase());
     setTimeout(() => {
         appendMessage(botReply, "bot");
     }, 500);
-    
+
     document.getElementById("userinput").value = "";
 }
 
