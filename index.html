@@ -1,9 +1,90 @@
-<div id="chatbot" style="width:340px; max-height:500px; border-radius:15px; box-shadow:0 0 10px rgba(0,0,0,0.1); overflow:hidden; display:flex; flex-direction:column; font-family:'Arial', sans-serif; font-size:14px;">
-  <div id="chatlog" style="flex:1; padding:10px; overflow-y:auto; background-color:#f9f9f9;"></div>
-  <div style="display:flex; border-top:1px solid #ccc;">
-    <input id="userinput" type="text" placeholder="Escribe tu mensaje..." style="flex:1; padding:10px; border:none;">
-    <button onclick="sendMessage()" style="padding:10px; background:#4CAF50; color:white; border:none; cursor:pointer;">Enviar</button>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chatbot AVP</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f2f5;
+      font-family: 'Arial', sans-serif;
+    }
+
+    #chatbot {
+      width: 340px;
+      height: 500px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background-color: white;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    #chatlog {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      background-color: #f9f9f9;
+    }
+
+    #sendButton {
+      padding: 10px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #closeButton {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: #ff0000;
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="chatbot">
+  <button id="closeButton" onclick="closeChatbot()">X</button>
+  <div id="chatlog"></div>
+  <div style="display: flex; border-top: 1px solid #ccc;">
+    <input id="userinput" type="text" placeholder="Escribe tu mensaje..." style="flex: 1; padding: 10px; border: none;">
+    <button id="sendButton">Enviar</button>
   </div>
 </div>
 
-<script src="https://fabfar12.github.io/chatbotavp/chatbot.js"></script>
+<script src="chatbot.js"></script>
+
+<script>
+  // Manejo de eventos
+  document.getElementById("sendButton").addEventListener("click", sendMessage);
+  document.getElementById("userinput").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      sendMessage();
+    }
+  });
+
+  function closeChatbot() {
+    document.getElementById("chatbot").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
