@@ -66,8 +66,6 @@ const defaultResponses = [
 
 function sendMessage() {
     let userText = document.getElementById("userinput").value.trim();
-    console.log("Texto escrito:", userText); // <-- línea de prueba
-
     if (userText === "") return;
 
     appendMessage(userText, "user");
@@ -106,9 +104,9 @@ function appendMessage(text, sender) {
         avatar.style.height = "30px";
         avatar.style.borderRadius = "50%";
         avatar.style.marginRight = "8px";
-        
+
         bubble.style.background = "#ffffff";
-        bubble.innerHTML = text; // Para que funcionen los links
+        bubble.innerHTML = text; // Importante: innerHTML para links
         
         messageWrapper.appendChild(avatar);
         messageWrapper.appendChild(bubble);
