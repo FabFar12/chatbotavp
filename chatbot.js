@@ -1,155 +1,154 @@
 // chatbot.js
 
-const keywordResponses = [
-  { 
-    keywords: ["hola", "buenas", "saludos"], 
-    responses: [
-      getDynamicGreeting(), 
-      "¡Hola! 😊 Soy Pepe, el bot de la cátedra de Pedagogía de la Facultad de Psicología de la UNC. ¿Sobre qué tema te gustaría consultar? Te puedo ayudar con cursado, parciales, trabajos prácticos o materiales."
-    ]
-  },
-  { 
-    keywords: ["preguntas sugeridas", "qué puedo preguntar", "ayuda"], 
-    responses: [
-      "🧠 Puedes preguntarme, por ejemplo:\n- ¿Qué necesito para promocionar?\n- ¿Qué necesito para regularizar?\n- ¿Cuándo es el primer parcial?\n- ¿Qué fechas son los trabajos prácticos?\n- ¿Dónde encuentro la bibliografía?"
-    ]
-  },
-  { 
-    keywords: ["cursado", "condiciones", "promocionales", "regulares", "libres"], 
-    responses: [
-      "📚 Condiciones de cursado:\n- PROMOCIONALES: 80% de asistencia (Aula-Taller, Tutorías, Conversatorios, Trabajos Prácticos), 3 TP aprobados con promedio 7, parciales promediando 7, trabajo final.\n- REGULARES: Aprobar 2 parciales (mínimo 4 puntos) y 3 Trabajos Prácticos entregados (mínimo 2 aprobados con 4 puntos).\n- LIBRES: Presentar propuesta creativa + evaluación escrita + defensa."
-    ]
-  },
-  { 
-    keywords: ["aula taller", "seminarios", "obligatorios", "fechas talleres", "fechas seminarios"], 
-    responses: [
-      "📅 Fechas de espacios obligatorios para promocionar:\n- Seminarios y Talleres:\n  * 1/4 - El Oficio de Enseñar\n  * 8/4 - Paradigmas Educativos\n  * 15/4 - Enfoques Digitales\n  * 22/4 - Acto Educativo\n  * 29/4 - Alfabetización Académica\n  * 6/5 - Inteligencia Artificial\n  * 27/5 - Conversatorio sobre profesión docente\n  * 3/6 - Contrato Educativo\n  * 10/6 - Protagonismo estudiantil\n  * 24/6 - Evaluación Emancipadora"
-    ]
-  },
-  { 
-    keywords: ["regularizar", "regular", "condiciones regular", "condición regular", "requisitos regular", "requisitos para regularizar"], 
-    responses: [
-      "📚 Para REGULARIZAR:\n- Asistir y entregar los 3 Trabajos Prácticos.\n- Aprobar 2 exámenes parciales (mínimo 4 puntos cada uno)."
-    ]
-  },
-  { 
-    keywords: ["promocionar", "qué necesito para promocionar", "requisitos promocionar", "requisitos para promocionar"], 
-    responses: [
-      "📚 Para promocionar la materia necesitas:\n- 80% de asistencia en Aula-Taller, Tutorías, Conversatorios y Trabajos Prácticos.\n- Aprobar 3 Trabajos Prácticos con promedio 7.\n- Aprobar los parciales con un promedio de 7.\n- Entregar el trabajo final."
-    ]
-  },
-  { 
-    keywords: ["libre", "libres", "rendir libre", "requisitos libre", "requisitos para rendir libre"], 
-    responses: [
-      "📚 Para rendir LIBRE la materia necesitas:\n- Presentar una propuesta creativa sobre un tema del curso.\n- Aprobar una evaluación escrita.\n- Defender tu propuesta de manera oral.\n\nToda la información sobre el Examen LIBRE está disponible en la pestaña 'Examen LIBRES' de la página de la cátedra. Podés acceder a ella aquí: <a href='https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=12#tabs-tree-start' target='_blank'>Examen LIBRES</a>"
-    ]
-  },
-  { 
-    keywords: ["parcial", "parciales", "fecha parcial", "fecha de parcial", "primer parcial", "segundo parcial", "recuperatorio"], 
-    responses: [
-      "📝 PARCIALES:\n- Primer Parcial: Martes 13 de mayo.\n- Segundo Parcial: Martes 17 de junio.\n- Recuperatorio: Jueves 4 de julio."
-    ]
-  },
-  { 
-    keywords: ["trabajo práctico", "trabajos prácticos", "tp", "tps", "trabajo práctico próximo", "próximo tp"], 
-    responses: [
-      "🛠️ TRABAJOS PRÁCTICOS:\n- Primer TP: 15 de abril.\n- Segundo TP: 27 de mayo.\n- Tercer TP: 24 de junio."
-    ]
-  },
-  { 
-    keywords: ["bibliografía", "material de estudio", "dónde está el material", "donde encuentro los textos", "materiales"], 
-    responses: [
-      "📚 Todo el material está disponible en:\n- <a href='https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=2#tabs-tree-start' target='_blank'>Materiales Bibliográficos</a>\n- <a href='https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=9#tabs-tree-start' target='_blank'>Parciales</a>\n- <a href='https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=5#tabs-tree-start' target='_blank'>Trabajos Prácticos</a>"
-    ]
-  },
-  { 
-    keywords: ["correo", "contacto", "consultas"], 
-    responses: [
-      "📬 Para consultas específicas, escribí a: cpype.unc@gmail.com"
-    ]
-  },
-];
+// Definir la URL de los cronogramas
+const cronogramaUrl = "https://psicologia.aulavirtual.unc.edu.ar/pluginfile.php/35319/mod_label/intro/CRONOGRAMA%202025%20Pedagog%C3%ADa.png";
 
-const defaultResponses = [
-  "🤔 No tengo esa información precisa. Por favor, enviá tu consulta a nuestro correo oficial: cpype.unc@gmail.com",
-  "📩 Esa pregunta es mejor tratarla directamente por correo: cpype.unc@gmail.com",
-  "ℹ️ Te sugiero escribir a cpype.unc@gmail.com para resolver esa duda específica."
-];
+// Avatar del chatbot
+const avatarUrl = "ruta/a/tu/avatar.png"; // Cambia esta URL con la ruta de tu avatar
 
-function sendMessage() {
-    let userText = document.getElementById("userinput").value.trim();
-    if (userText === "") return;
-    
-    appendMessage(userText, "user");
-    
-    let botReply = getBotResponse(userText.toLowerCase());
-    setTimeout(() => {
-        appendMessage(botReply, "bot");
-    }, 500);
-    
-    document.getElementById("userinput").value = "";
-}
+// Respuestas del chatbot
+const respuestas = {
+  saludo: "¡Hola! Soy Pepe, el chatbot de la Cátedra de Pedagogía de la Facultad de Psicología de la UNC.",
+  
+  clasesTeoricas: "En esta cátedra no contamos con clases teóricas propiamente dichas, sino que ofrecemos a lxs estudiantes una serie de dispositivos pedagógicos específicamente diseñados, que asumen la forma de Seminario-Taller, Aula-Taller y Conversatorios. Todos ellos se desarrollan todas las semanas los días martes en el horario de 16.00 a 18.00 hs. Puedes revisar el Cronograma [aquí](https://psicologia.aulavirtual.unc.edu.ar/pluginfile.php/35319/mod_label/intro/CRONOGRAMA%202025%20Pedagog%C3%ADa.png). Si deseas información más detallada sobre alguno de estos dispositivos pedagógicos, por favor especifica cuál quieres conocer.",
+  
+  comisionesTP: "Los encuentros de Trabajos Prácticos se desarrollan mensualmente, los días martes en distintos horarios.\n\nLa Comisión 01 (C1) a cargo de la Prof. Marisabel Oviedo se lleva a cabo en el horario de 12.00 a 14.00 hs. en el aula E del módulo nuevo.\nLa Comisión 02 (C2) a cargo de la Prof. Mónica Fornasari se lleva a cabo en el horario de 14.00 a 16.00 hs. en el aula G del módulo nuevo.\nLa Comisión 03 (C3) a cargo del Prof. Fabian Fariña se lleva a cabo en el horario de 18.00 a 20.00 hs. en el aula K1 del módulo nuevo.",
+  
+  examenes: "Los parciales se rinden en los horarios de las comisiones de trabajos prácticos (C1: 12.00hs.; C2: 14.00hs.; y C3: 18.00hs., según corresponda), a excepción de la Reprogramación y el Recuperatorio que se rinden a las 18:00 hs., y el recuperatorio por una cuestión de agenda del cuatrimestre se realiza un día VIERNES.",
 
-function appendMessage(text, sender) {
-    let chatlog = document.getElementById("chatlog");
-    let messageWrapper = document.createElement("div");
-    messageWrapper.style.display = "flex";
-    messageWrapper.style.marginBottom = "10px";
-    messageWrapper.style.alignItems = "flex-end";
+  condicionesCursado: "Las condiciones de cursado son:\n- Estudiantes Regulares: Asistir a los tres trabajos prácticos (uno por mes) y entregarlos en tiempo y forma.\n- Estudiantes Promocionales: Cumplir con la asistencia y las entregas, y además participar activamente en los dispositivos pedagógicos.\n- Estudiantes Libres: Seguir el proceso administrativo y rendir los exámenes según los requerimientos.",
+  
+  requisitosRegularizar: "Para regularizar como estudiante regular se requiere el cumplimiento mínimo de asistir a los tres trabajos prácticos (uno por mes) y entregarlos en el tiempo establecido. Las fechas de los encuentros en los horarios de cada Comisión son TP1: 15 de abril; TP2: 27 de mayo; y TP3: 24 de junio.",
+  
+  requisitosPromocionar: "Para ser estudiante promocional se requiere cumplir con las condiciones mínimas de la materia y también profundizar en la participación y el compromiso. La condición de promocional está pensada para ir un ‘poco más allá’ del mínimo. Aquí nosotros ponemos el piso, pero al techo lo definís vos.",
+  
+  requisitosLibre: "Para rendir como estudiante libre, debes realizar el trámite de acceso con la Secretaría de Asuntos Estudiantiles al correo sae@psicologia.unc.edu.ar. Toda la información para rendir en condición de libre se encuentra disponible en la pestaña 'Examen LIBRE'. [Aquí está el enlace directo](https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=12#tabs-tree-start).",
+  
+  recuperarParcialAprobado: "Puedes recuperar un parcial aprobado (con calificación 4, 5 o 6) para alcanzar el promedio requerido de 6 y promedio general de 7.",
+  
+  recuperarParcialDesaprobado: "Se puede recuperar un parcial aprobado (con calificación 4, 5 o 6) para alcanzar el promedio requerido de 6 y promedio de 7. Si faltaste sin justificar o desaprobaste un parcial, debes seguir el camino para ser estudiante regular, pero no te desanimes, seguimos aprendiendo juntos.",
+  
+  recuperarParcialAusente: "Puedes recuperar un parcial ausente sólo si has justificado la inasistencia a través de la SAE. La fecha de reprogramación es el martes 01 de julio A LAS 18:00 hs. (Reprogramación). Si no justificas, seguirás el camino regular para ser estudiante regular.",
+  
+  diferenciaDispositivos: "Los espacios de Seminario-Taller son encuentros similares a las clásicas clases teóricas, pero se dictan con objetivos, metodologías y dinámicas diferenciadas.\n\nLos Aula-Taller se enfocan en temáticas emergentes y buscan situar la formación docente en un contexto local y regional.\n\nLos Conversatorios son espacios con docentes invitados que nos invitan a pensar la educación a través de sus trayectorias profesionales.",
+  
+  bibliografiaMaterial: "Todo el material está disponible en la pestaña 'Materiales Bibliográficos'. [Consulta los materiales aquí](https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=2#tabs-tree-start). Para más detalles, puedes revisar el 'Programa de Pedagogía 2025' [aquí](https://psicologia.aulavirtual.unc.edu.ar/mod/resource/view.php?id=18486).",
+  
+  materialesParciales: "El material de los exámenes está desglosado en la pestaña 'Parciales'. [Consulta los materiales aquí](https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=9#tabs-tree-start). Además, todo el material de la materia está disponible en la pestaña 'Materiales Bibliográficos'. [Revisa los materiales aquí](https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=2#tabs-tree-start).",
+  
+  materialesTP: "Todo el material de los Trabajos Prácticos está disponible en la pestaña 'Trabajos Prácticos'. [Consulta los materiales aquí](https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=5#tabs-tree-start). Además, puedes acceder a la pestaña 'Materiales Bibliográficos' para revisar todo el material de la materia [aquí](https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=2#tabs-tree-start).",
 
-    let bubble = document.createElement("div");
-    bubble.style.maxWidth = "70%";
-    bubble.style.padding = "8px 12px";
-    bubble.style.borderRadius = "15px";
-    bubble.style.wordBreak = "break-word";
+  fechas: {
+    seminarios: [
+      "Martes 01/04/2025 16.00hs. - El oficio de enseñar. Identidad profesional docente. (Prof. Mónica Fornasari)",
+      "Martes 08/04/2025 16.00hs. - Paradigmas y Enfoques Educativos. (Prof. Mónica Fornasari)",
+      "Martes 22/04/2025 16.00hs. - Acto Educativo. Educación, Psicología y Pedagogía. (Prof. Mónica Fornasari)",
+      "Martes 03/06/2025 16.00hs. - Contrato Educativo. La tríada docente/estudiante/conocimiento. (Prof. Mónica Fornasari)"
+    ],
+    aulasTaller: [
+      "Martes 15/04/2025 16.00hs. - Enfoques Digitales y Tecnoculturales. (Prof. Fabian Fariña)",
+      "Martes 29/04/2025 16.00hs. - La Alfabetización Académica en los procesos de escritura universitaria. (Prof. Marisabel Oviedo)",
+      "Martes 06/05/2025 16.00hs. - La Inteligencia Artificial en los procesos educativos. (Prof. Fabian Fariña)",
+      "Martes 24/06/2025 16.00hs. - Dispositivos de Evaluación. Emancipación y praxis sociopedagógicas. (Prof. Gabriela González Brizuela)"
+    ],
+    conversatorios: [
+      "Martes 27/05/2025 16.00hs. - La profesión docente. Relatos de Experiencias y Prácticas Educativas. (Lic. Susana Aselles)",
+      "Martes 10/06/2025 16.00hs. - Sujeto epistémico, protagonismo estudiantil y formación docente. (Mgter. Horacio Maldonado)"
+    ],
+    parciales: [
+      "PRIMER PARCIAL: Martes 13/05/2025 (12:00, 14:00 y 18:00hs.)",
+      "SEGUNDO PARCIAL: Martes 17/06/2025 (12:00, 14:00 y 18:00hs.)",
+      "REPROGRAMACIÓN: Martes 01/07/2025 18:00hs. (Reprogramación)",
+      "RECUPERATORIO: Viernes 04/07/2025 18:00hs. (Recuperatorio)"
+    ],
+    trabajosPracticos: [
+      "TP1: Martes 15/04/2025 (12:00, 14:00 y 18:00hs.)",
+      "TP2: Martes 27/05/2025 (12:00, 14:00 y 18:00hs.)",
+      "TP3: Martes 24/06/2025 (12:00, 14:00 y 18:00hs.)",
+      "RECUPERATORIO: Martes 01/07/2025 (18:00hs.)"
+    ],
+    tutorias: [
+      "Tutoría Virtual: Martes 06/05/2025 (Horarios según Comisión)",
+      "Tutoría Virtual: Martes 10/06/2025 (Horarios según Comisión)",
+      "Tutoría Presencial: Martes 01/07/2025 16.00hs. (A cargo de la Prof. Melisa Vázquez)"
+    ]
+  },
 
-    if (sender === "user") {
-        bubble.style.background = "#DCF8C6";
-        bubble.style.marginLeft = "auto";
-        messageWrapper.style.justifyContent = "flex-end";
-        bubble.innerText = text;
-        messageWrapper.appendChild(bubble);
-    } else {
-        let avatar = document.createElement("img");
-        avatar.src = "https://cdn-icons-png.flaticon.com/512/4712/4712104.png"; 
-        avatar.style.width = "30px";
-        avatar.style.height = "30px";
-        avatar.style.borderRadius = "50%";
-        avatar.style.marginRight = "8px";
-        
-        bubble.style.background = "#ffffff";
-        bubble.innerHTML = text; // Para que funcionen los links
-        
-        messageWrapper.appendChild(avatar);
-        messageWrapper.appendChild(bubble);
-    }
+  respuestasNoReconocidas: "Lo siento, no pude entender tu pregunta. ¿Podrías reformularla? Si sigue sin ser comprendida, por favor remite tu consulta al correo electrónico de la cátedra: cpype.unc@gmail.com, y te responderemos a la brevedad."
+};
 
-    chatlog.appendChild(messageWrapper);
-    chatlog.scrollTop = chatlog.scrollHeight;
-}
+// Función que maneja las respuestas según la pregunta del usuario
+function obtenerRespuesta(pregunta) {
+  pregunta = pregunta.toLowerCase();
 
-function getBotResponse(userInput) {
-    for (let entry of keywordResponses) {
-        for (let keyword of entry.keywords) {
-            if (userInput.includes(keyword)) {
-                return randomChoice(entry.responses);
-            }
-        }
-    }
-    return randomChoice(defaultResponses);
-}
+  if (pregunta.includes("saludo")) {
+    return respuestas.saludo;
+  }
 
-function randomChoice(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-}
+  if (pregunta.includes("clases teóricas")) {
+    return respuestas.clasesTeoricas;
+  }
 
-function getDynamicGreeting() {
-    const hour = new Date().getHours();
-    if (hour >= 5 && hour < 12) {
-        return "¡Buenos días! ☀️ ¿Listo para aprender?";
-    } else if (hour >= 12 && hour < 18) {
-        return "¡Buenas tardes! 🌞 ¿Cómo puedo ayudarte?";
-    } else {
-        return "¡Buenas noches! 🌙 ¿Qué consulta tenés sobre el cursado?";
-    }
+  if (pregunta.includes("comisiones tp")) {
+    return respuestas.comisionesTP;
+  }
+
+  if (pregunta.includes("exámenes")) {
+    return respuestas.examenes;
+  }
+
+  if (pregunta.includes("condiciones de cursado")) {
+    return respuestas.condicionesCursado;
+  }
+
+  if (pregunta.includes("requisitos regularizar")) {
+    return respuestas.requisitosRegularizar;
+  }
+
+  if (pregunta.includes("requisitos promocionar")) {
+    return respuestas.requisitosPromocionar;
+  }
+
+  if (pregunta.includes("requisitos libre")) {
+    return respuestas.requisitosLibre;
+  }
+
+  if (pregunta.includes("recuperar parcial aprobado")) {
+    return respuestas.recuperarParcialAprobado;
+  }
+
+  if (pregunta.includes("recuperar parcial desaprobado")) {
+    return respuestas.recuperarParcialDesaprobado;
+  }
+
+  if (pregunta.includes("recuperar parcial ausente")) {
+    return respuestas.recuperarParcialAusente;
+  }
+
+  if (pregunta.includes("diferencia dispositivos")) {
+    return respuestas.diferenciaDispositivos;
+  }
+
+  if (pregunta.includes("bibliografía") || pregunta.includes("material de estudio") || pregunta.includes("materiales bibliográficos")) {
+    return respuestas.bibliografiaMaterial;
+  }
+
+  if (pregunta.includes("materiales de los parciales")) {
+    return respuestas.materialesParciales;
+  }
+
+  if (pregunta.includes("trabajos prácticos")) {
+    return respuestas.materialesTP;
+  }
+
+  if (pregunta.includes("fechas")) {
+    return respuestas.fechas;
+  }
+
+  if (pregunta.includes("tutoría")) {
+    return respuestas.tutorias;
+  }
+
+  // Si la pregunta no está en el listado, pedimos reformulación
+  return respuestas.respuestasNoReconocidas;
 }
