@@ -77,78 +77,40 @@ const respuestas = {
   respuestasNoReconocidas: "Lo siento, no pude entender tu pregunta. ¿Podrías reformularla? Si sigue sin ser comprendida, por favor remite tu consulta al correo electrónico de la cátedra: cpype.unc@gmail.com, y te responderemos a la brevedad."
 };
 
-// Función que maneja las respuestas según la pregunta del usuario
+// Función para manejar las preguntas y respuestas del chatbot
 function obtenerRespuesta(pregunta) {
+  // Convertimos la pregunta a minúsculas para hacer una búsqueda más flexible
   pregunta = pregunta.toLowerCase();
 
-  if (pregunta.includes("saludo")) {
-    return respuestas.saludo;
+  // Respuestas basadas en la pregunta
+  if (pregunta.includes("bibliografía") || pregunta.includes("material de estudio")) {
+    return "Todo el material está disponible en la pestaña 'Materiales Bibliográficos'. Puedes acceder a ella aquí: <a href='https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=2#tabs-tree-start' target='_blank'>Materiales Bibliográficos</a>.";
+  } else if (pregunta.includes("parcial") || pregunta.includes("examen")) {
+    return "Los detalles sobre los parciales están disponibles en la pestaña 'Parciales'. Puedes acceder a ella aquí: <a href='https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=9#tabs-tree-start' target='_blank'>Parciales</a>.";
+  } else if (pregunta.includes("trabajo práctico") || pregunta.includes("tp")) {
+    return "El material de los trabajos prácticos está disponible en la pestaña 'Trabajos Prácticos'. Puedes acceder a ella aquí: <a href='https://psicologia.aulavirtual.unc.edu.ar/course/view.php?id=122&section=5#tabs-tree-start' target='_blank'>Trabajos Prácticos</a>.";
+  } else if (pregunta.includes("fecha") || pregunta.includes("cuándo")) {
+    return obtenerFecha();
+  } else {
+    return "Lo siento, no entendí la pregunta. Por favor, reformula tu consulta o envíala al correo de la cátedra: <a href='mailto:cpype.unc@gmail.com'>cpype.unc@gmail.com</a>.";
   }
+}
 
-  if (pregunta.includes("clases teóricas")) {
-    return respuestas.clasesTeoricas;
+// Función para devolver la fecha correspondiente a los eventos
+function obtenerFecha() {
+  const hoy = new Date();
+  const fecha = hoy.getDate();
+  const mes = hoy.getMonth() + 1; // Mes es indexado desde 0
+  const año = hoy.getFullYear();
+
+  // Comprobar la fecha actual y devolver el próximo evento
+  if (mes === 4 && fecha >= 1 && fecha <= 30) {
+    return "El próximo seminario-taller es el Martes 01/04/2025 a las 16:00hs. Tema: 'El oficio de enseñar. Identidad profesional docente.' Prof. Mónica Fornasari.";
+  } else if (mes === 5) {
+    return "El próximo parcial es el Martes 13/05/2025 a las 12:00, 14:00 y 18:00hs.";
+  } else if (mes === 6) {
+    return "El próximo seminario-taller es el Martes 03/06/2025 a las 16:00hs. Tema: 'Contrato Educativo. La tríada docente/estudiante/conocimiento.' Prof. Mónica Fornasari.";
+  } else {
+    return "No se encontró un evento próximo en el cronograma para esta fecha.";
   }
-
-  if (pregunta.includes("comisiones tp")) {
-    return respuestas.comisionesTP;
-  }
-
-  if (pregunta.includes("exámenes")) {
-    return respuestas.examenes;
-  }
-
-  if (pregunta.includes("condiciones de cursado")) {
-    return respuestas.condicionesCursado;
-  }
-
-  if (pregunta.includes("requisitos regularizar")) {
-    return respuestas.requisitosRegularizar;
-  }
-
-  if (pregunta.includes("requisitos promocionar")) {
-    return respuestas.requisitosPromocionar;
-  }
-
-  if (pregunta.includes("requisitos libre")) {
-    return respuestas.requisitosLibre;
-  }
-
-  if (pregunta.includes("recuperar parcial aprobado")) {
-    return respuestas.recuperarParcialAprobado;
-  }
-
-  if (pregunta.includes("recuperar parcial desaprobado")) {
-    return respuestas.recuperarParcialDesaprobado;
-  }
-
-  if (pregunta.includes("recuperar parcial ausente")) {
-    return respuestas.recuperarParcialAusente;
-  }
-
-  if (pregunta.includes("diferencia dispositivos")) {
-    return respuestas.diferenciaDispositivos;
-  }
-
-  if (pregunta.includes("bibliografía") || pregunta.includes("material de estudio") || pregunta.includes("materiales bibliográficos")) {
-    return respuestas.bibliografiaMaterial;
-  }
-
-  if (pregunta.includes("materiales de los parciales")) {
-    return respuestas.materialesParciales;
-  }
-
-  if (pregunta.includes("trabajos prácticos")) {
-    return respuestas.materialesTP;
-  }
-
-  if (pregunta.includes("fechas")) {
-    return respuestas.fechas;
-  }
-
-  if (pregunta.includes("tutoría")) {
-    return respuestas.tutorias;
-  }
-
-  // Si la pregunta no está en el listado, pedimos reformulación
-  return respuestas.respuestasNoReconocidas;
 }
