@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Meta información -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chatbot Pedagogía</title>
+
+  <!-- Enlace al archivo CSS -->
+  <link rel="stylesheet" type="text/css" href="ruta/a/chatbot.css">
+
+  <!-- Estilos generales, si no los tienes en el archivo CSS -->
   <style>
     /* Estilos generales */
     body {
@@ -104,6 +110,7 @@
   <!-- Vinculamos el archivo JS -->
   <script src="chatbot.js"></script>
 
+  <!-- Función para manejar la interacción -->
   <script>
     function enviarPregunta() {
       const userInput = document.getElementById("user-input").value;
@@ -113,5 +120,6 @@
       document.getElementById("user-input").value = ""; // Limpiar input
     }
   </script>
+
 </body>
 </html>
