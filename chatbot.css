@@ -1,0 +1,88 @@
+/* chatbot.css */
+
+/* Estilo para el contenedor del chatbot */
+#chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  height: 400px;
+  background-color: #f1f1f1;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para el área de mensajes */
+#chatbot-messages {
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: auto;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* Estilo para los mensajes del usuario */
+.chatbot-message-user {
+  background-color: #4caf50;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  max-width: 70%;
+  align-self: flex-end;
+}
+
+/* Estilo para los mensajes del chatbot */
+.chatbot-message-bot {
+  background-color: #0084ff;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  max-width: 70%;
+  align-self: flex-start;
+}
+
+/* Estilo para el área de entrada de texto */
+#chatbot-input-area {
+  display: flex;
+  padding: 10px;
+  background-color: #ffffff;
+  border-top: 2px solid #ccc;
+}
+
+#chatbot-input {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+#chatbot-send-button {
+  background-color: #0084ff;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+  border: none;
+}
+
+/* Estilo cuando el chatbot está "activo" */
+#chatbot-container.active {
+  animation: slideIn 0.5s ease-out;
+}
+
+/* Animación para el chatbot */
+@keyframes slideIn {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
