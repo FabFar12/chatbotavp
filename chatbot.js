@@ -1,6 +1,9 @@
 const respuestas = {
   saludo: "¡Hola! Soy el chatbot de la cátedra de Pedagogía de la UNC. ¿En qué puedo ayudarte?",
-  clasesTeoricas: "En esta cátedra no contamos con clases teóricas propiamente dichas, sino que ofrecemos a lxs estudiantes una serie de dispositivos pedagógicos específicamente diseñados, que asumen la forma de Seminario-Taller, Aula-Taller y Conversatorios. Todos ellos se desarrollan todas las semanas los días martes en el horario de 16.00 a 18.00 hs.",
+  clasesTeoricas: "En esta cátedra no contamos con clases teóricas propiamente dichas, sino que ofrecemos a lxs estudiantes una serie de dispositivos pedagógicos específicamente diseñados, que asumen la forma de Seminario-Taller, Aula-Taller y Conversatorios. Todos ellos se desarrollan todas las semanas los días martes en el horario de 16.00 a 18.00 hs. ¿Querés información sobre algunas de estos dispositivos pedagógicos?",
+  semirario: "Los espacios de Seminario-Taller son encuentros similares a las clásicas clases teóricas que conocen en la Facultad, pero se dictan de una manera diferenciada como dispositivo pedagógico en cuanto a sus objetivos, metodologías y dinámicas.",
+  aula: "Los espacios de Aula-Taller son otro tipo de dispositivo pedagógico, una propuesta específica del Equipo de Cátedra que tienen por finalidad profundizar en alguna temática o problemática emergente, porque partimos del convencimiento de que debemos traer a la formación docente a este contexto, de manera situada en este escenario local y regional, en este momento histórico específico.",
+  conversatorio: "Los Conversatorios, se tratan de propuestas traídas por docentes invitados con probada y extensa trayectorias profesionales en el contexto educativo local y regional. Se trata de voces actuales y vigentes que nos invitan a pensar y re-pensar lo que sabemos de la educación, y a pensar en clave de a dónde mirar cuando pensamos en el futuro de la educación.",
   comisionesTP: "Los encuentros de Trabajos Prácticos se desarrollan mensualmente, los días martes en distintos horarios. La Comisión 01 (C1) a cargo de la Prof. Marisabel Oviedo se lleva a cabo en el horario de 12.00 a 14.00 hs. en el aula E del módulo nuevo. La Comisión 02 (C2) a cargo de la Prof. Mónica Fornasari se lleva a cabo en el horario de 14.00 a 16.00 hs. en el aula G del módulo nuevo. La Comisión 03 (C3) a cargo del Prof. Fabian Fariña se lleva a cabo en el horario de 18.00 a 20.00 hs. en el aula K1 del módulo nuevo.",
   examenes: "Los exámenes parciales se rinden los días 13 de mayo y 17 de junio, en los horarios de las comisiones de TP. El Recuperatorio se rinde el día VIERNES 04 de julio a las 18:00hs.",
   condicionesCursado: "Todas las especificaciones de cursado se encuentran en el Programa de la cátedra, y encontrarán una síntesis en el archivo de Presentación de la materia. Ambos documentos en la pestaña general del AVP.",
@@ -25,6 +28,12 @@ function obtenerRespuesta(pregunta) {
     return respuestas.saludo;
   } else if (pregunta.includes("clases teóricas")) {
     return respuestas.clasesTeoricas;
+  } else if (pregunta.includes("seminario")) {
+    return respuestas.seminario;
+  } else if (pregunta.includes("aula")) {
+    return respuestas.aula;
+  } else if (pregunta.includes("conversatorio")) {
+    return respuestas.conversatorio;
   } else if (pregunta.includes("comisiones") || pregunta.includes("tp") || pregunta.includes("trabajo práctico")) {
     return respuestas.comisionesTP;
   } else if (pregunta.includes("parcial") && pregunta.includes("recuperar")) {
