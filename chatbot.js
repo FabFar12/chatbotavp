@@ -56,3 +56,38 @@ function obtenerRespuesta(pregunta) {
     return respuestas.respuestasNoReconocidas;
   }
 }
+
+function mostrarMensaje(texto, clase) {
+  const chat = document.getElementById("chat");
+  const mensaje = document.createElement("div");
+  mensaje.className = clase;
+  mensaje.innerText = texto;
+  chat.appendChild(mensaje);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function enviarMensaje() {
+  const input = document.getElementById("input");
+  const pregunta = input.value.trim();
+  if (pregunta === "") return;
+
+  mostrarMensaje("👤 " + pregunta, "usuario");
+  const respuesta = obtenerRespuesta(pregunta);
+  mostrarMensaje("🤖 " + respuesta, "bot");
+
+  input.value = "";
+}
+
+// Soporte para tecla Enter
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("input");
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      enviarMensaje();
+    }
+  });
+
+  const boton = document.getElementById("enviar");
+  boton.addEventListener("click", enviarMensaje);
+});
