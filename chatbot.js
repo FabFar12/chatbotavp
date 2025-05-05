@@ -11,7 +11,7 @@ const respuestas = {
   bibliografiaMaterial: "La bibliografía obligatoria está disponible en el aula virtual y en fotocopiadora. También recomendamos textos complementarios.",
   materialesParciales: "Para los parciales necesitás estudiar la bibliografía obligatoria y las presentaciones de clase.",
   materialesTP: "Para los trabajos prácticos se usan guías que se entregan en clase y se suben al aula virtual.",
-  tutorias: "Las tutorías se realizan los martes de 14 a 16 hs en el aula 2 o por Zoom con turno previo.",
+  tutorias: "Las tutorías se realizan en los tres turnos (12, 14 y 18hs) de manera virtual, a excepción de la última tutoría obligatoria para promocionales el día 01/07/2025 a las 16:00hs.",
   recuperarParcialAprobado: "Si aprobaste el parcial, no necesitás recuperarlo.",
   recuperarParcialDesaprobado: "Podés recuperar un parcial si lo desaprobaste, pero solo una vez.",
   recuperarParcialAusente: "Si estuviste ausente, podés rendir el parcial en la instancia de recuperación.",
