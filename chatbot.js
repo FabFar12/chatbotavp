@@ -45,7 +45,7 @@ function obtenerRespuesta(pregunta) {
     return respuestas.examenes;
   } else if (pregunta.includes("condiciones de cursado")) {
     return respuestas.condicionesCursado;
-  } else if (pregunta.includes("regular") && pregunta.includes("requisito")) {
+  } else if (pregunta.includes("regular") || pregunta.includes("requisito") || pregunta.includes("regularizar")) {
     return respuestas.requisitosRegularizar;
   } else if (pregunta.includes("promocion") || pregunta.includes("promocionar")) {
     return respuestas.requisitosPromocionar;
@@ -53,7 +53,7 @@ function obtenerRespuesta(pregunta) {
     return respuestas.requisitosLibre;
   } else if (pregunta.includes("dispositivo") || pregunta.includes("seminario") || pregunta.includes("taller")) {
     return respuestas.diferenciaDispositivos;
-  } else if (pregunta.includes("bibliografía") || pregunta.includes("material de estudio")) {
+  } else if (pregunta.includes("bibliografía") || pregunta.includes("material de estudio") || pregunta.includes("textos") || pregunta.includes("autores")) {
     return respuestas.bibliografiaMaterial;
   } else if (pregunta.includes("material") && pregunta.includes("parcial")) {
     return respuestas.materialesParciales;
